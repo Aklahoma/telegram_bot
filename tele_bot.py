@@ -1,8 +1,9 @@
 import telebot
 import requests
 import time
+import hashing
 
-bot = telebot.TeleBot("651590241:AAHgKPJL_pkRMPUzMdW9uT-FIrhwTzfgyeM")
+bot = telebot.TeleBot(hashing.token)
 
 @bot.message_handler(commands=['newbtn'])
 def handle_start(message):

@@ -2,7 +2,7 @@ import requests
 import time
 
 
-token = "651590241:AAHgKPJL_pkRMPUzMdW9uT-FIrhwTzfgyeM"
+
 
 #post на url с сертификатом
 def out_text(url, id):
