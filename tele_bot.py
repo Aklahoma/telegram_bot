@@ -14,22 +14,21 @@ def handle_start(message):
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(True)
-    user_markup.row('100realty', 'Parklane', 'Blagovist')
-    user_markup.row('Bizrealty', 'Bizrealty_UK')
+    user_markup.row('https://100realty.ua/', 'https://parklane.ua/', 'https://blagovist.ua/')
+    user_markup.row('https://bizrealty.ua/', 'https://frg.ua/')
     bot.send_message(message.from_user.id, 'Выберите сайт:', reply_markup=user_markup)
 
 @bot.message_handler(content_types=['text'])
 def handle_start(message):
-    if message.text == '100realty':
-        out_text("https://100realty.ua/",message.from_user.id)
-    if message.text == 'Parklane':
-        out_text('https://parklane.ua/', message.from_user.id)
-    if message.text == 'Blagovist':
-        out_text('https://blagovist.ua/', message.from_user.id)
-    if message.text == 'Bizrealty':
-        verify_url_false('https://bizrealty.ua/', message.from_user.id)
-    if message.text == 'Bizrealty_UK':
-        verify_url_false('https://bizrealty.ua/uk', message.from_user.id)
+    if (message.text.find("http://") != -1 or message.text.find("https://") != -1):
+        if message.text.find("bizrealty") != -1:
+            verify_url_false(message.text, message.from_user.id)
+        else:
+            out_text(message.text, message.from_user.id)
+    else:
+        bot.send_message(message.from_user.id, 'Введите адресс сайта: напр. <a href="https://www.google.com/">https://google.com</a>.', disable_web_page_preview=True, parse_mode="HTML")
+
+
 
 def out_text(url, id):
     t1 = int(round(time.time() * 1000))
@@ -48,13 +47,5 @@ def verify_url_false(url, id):
     time_load = str((t2 - t1) / 1000)
     sec = '\nLoadtime: ' + time_load + 's'
     bot.send_message(id, url + "\n" + status + sec, disable_web_page_preview=True, parse_mode='HTML')
-
-
-@bot.message_handler(commands=['stop'])
-def handle_start(message):
-    hide_markup = telebot.types.ReplyKeyboardRemove(True)
-    bot.send_message(message.from_user.id, '...', reply_markup=hide_markup)
-
-
 
 bot.polling(none_stop=True)
