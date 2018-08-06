@@ -1,7 +1,6 @@
 import telebot
 import requests
 import time
-import hashing #sdasda
 import hashing #импорт файла с токеном бота
 
 bot = telebot.TeleBot(hashing.token) #Токен бота
@@ -10,7 +9,6 @@ bot = telebot.TeleBot(hashing.token) #Токен бота
 def handle_start(message):
     newbtn = telebot.types.InlineKeyboardButton(text='Test1', callback_data=1)
     bot.send_message(message.from_user.id, 'Bla')
-
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
