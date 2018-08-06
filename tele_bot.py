@@ -1,6 +1,7 @@
 import telebot
 import requests
 import time
+import hashing #sdasda
 import hashing #импорт файла с токеном бота
 
 bot = telebot.TeleBot(hashing.token) #Токен бота
