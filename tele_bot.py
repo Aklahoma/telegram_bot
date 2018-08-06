@@ -1,7 +1,7 @@
 import telebot
 import requests
 import time
-import hashing
+import hashing #sdasda
 
 bot = telebot.TeleBot(hashing.token)
 
